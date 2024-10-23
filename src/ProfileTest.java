@@ -56,6 +56,7 @@ class ProfileTest {
 	}
 
 	private static Stream<Arguments> testProfileData() {
+		// the arguments are: grades, classification and the expected value form isClear
 		return Stream.of(
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(2), new Grade(3), new Grade(4)),
 						Classification.First, true), //First, clear

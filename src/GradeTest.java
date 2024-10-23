@@ -79,6 +79,7 @@ class GradeTest {
 	}
 	
 	private static Stream<Arguments> testFromPrecentageAsEQC(){
+		// the arguments are: percentage and expected grade 
 		return Stream.of(
 				Arguments.of(85, 1),
 				Arguments.of(79, 2),
