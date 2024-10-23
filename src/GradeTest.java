@@ -20,8 +20,8 @@ class GradeTest {
 	@ValueSource(ints = { 0, 21 }) // testing invalid grades
 	void testGradeConstructorInvalid(int grade) {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> new Grade(grade),
-				"Expected from the constructor to throw, but it didn't");
-		assertTrue(exception.getMessage().contains("The grades must be between 0 and 20"));
+				"Expected from the constructor to throw, but it did not.");
+		assertTrue(exception.getMessage().contains("The grades must be between 0 and 20."));
 	}
 	
 // -------> TWO tests for inputs below and above the valid range for fromPercentage <-------
@@ -35,8 +35,8 @@ class GradeTest {
 	@ValueSource(ints = { -2, 101 }) // testing invalid values for fromPercentage
 	void testFromPercentageInvalid(int percentage) {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> Grade.fromPercentage(percentage),
-				"Expected from fromPercentage() to throw, but it didn't");
-		assertTrue(exception.getMessage().contains("The percentage must be between 0, 100 or excatly -1"));
+				"Expected from fromPercentage() to throw, but it did not.");
+		assertTrue(exception.getMessage().contains("The percentage must be between 0, 100 or excatly -1."));
 	}
 
 // ------->ONE test for a valid input, checking that getPoints returns the right value.	<-------
@@ -45,7 +45,7 @@ class GradeTest {
 	void testGetPoints() {
 		int input = 10; // choosing a valid input between 0-20
 		Grade grade = new Grade(input);
-		assertEquals(input, grade.getPoints(), "getPoints() must return the correct value of input");
+		assertEquals(input, grade.getPoints(), "getPoints() must return the correct value of input.");
 	}
 
 // -------> FIVE tests for classify, using Classifications as equivalence classes <-------	
@@ -53,7 +53,7 @@ class GradeTest {
 	@MethodSource("testClassifyAsEQC")
 	void testClassify(int input, Classification cls) {
 		Grade grade = new Grade(input);
-		assertEquals(cls, grade.classify(), "The Classification should match expected");
+		assertEquals(cls, grade.classify(), "The Classification should match expected.");
 	}
 	
 	private static Stream<Arguments> testClassifyAsEQC(){
@@ -75,7 +75,7 @@ class GradeTest {
 	@MethodSource("testFromPrecentageAsEQC")
 	void testFromPrecentage(int percentage, int expectedGrade) {
 		Grade grade = Grade.fromPercentage(percentage);
-		assertEquals(expectedGrade, grade.getPoints(), "The grade should correctly convert from percentage to grade point");
+		assertEquals(expectedGrade, grade.getPoints(), "The grade should correctly convert from percentage to grade point.");
 	}
 	
 	private static Stream<Arguments> testFromPrecentageAsEQC(){
