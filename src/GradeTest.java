@@ -21,7 +21,7 @@ class GradeTest {
 	void testGradeConstructorInvalid(int grade) {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> new Grade(grade),
 				"Expected from the constructor to throw, but it did not.");
-		assertTrue(exception.getMessage().contains("The grades must be between 0 and 20."));
+		assertTrue(exception.getMessage().contains("The grades must be between 1 and 20."));
 	}
 	
 // -------> TWO tests for inputs below and above the valid range for fromPercentage <-------
@@ -81,25 +81,25 @@ class GradeTest {
 	private static Stream<Arguments> testFromPrecentageAsEQC(){
 		// the arguments are: percentage and expected grade 
 		return Stream.of(
-				Arguments.of(85, 1),
-				Arguments.of(79, 2),
-				Arguments.of(74, 3),
-				Arguments.of(72, 4),
-				Arguments.of(68, 5),
-				Arguments.of(66, 6),
-				Arguments.of(63, 7),
+				Arguments.of(80, 1),
+				Arguments.of(76, 2),
+				Arguments.of(73, 3),
+				Arguments.of(70, 4),
+				Arguments.of(67, 5),
+				Arguments.of(65, 6),
+				Arguments.of(62, 7),
 				Arguments.of(60, 8),
-				Arguments.of(58, 9),
+				Arguments.of(57, 9),
 				Arguments.of(55, 10),
-				Arguments.of(53, 11),
+				Arguments.of(52, 11),
 				Arguments.of(50, 12),
-				Arguments.of(48, 13),
+				Arguments.of(47, 13),
 				Arguments.of(45, 14),
-				Arguments.of(43, 15),
+				Arguments.of(42, 15),
 				Arguments.of(40, 16),
-				Arguments.of(36, 17),
-				Arguments.of(31, 18),
-				Arguments.of(15, 19),
+				Arguments.of(35, 17),
+				Arguments.of(30, 18),
+				Arguments.of(0, 19),
 				Arguments.of(-1, 20)
 				);
 	}
