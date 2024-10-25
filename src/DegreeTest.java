@@ -63,8 +63,7 @@ class DegreeTest {
 		// the arguments are: year two, third year, classification
 		return Stream.of(
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(2), new Grade(3), new Grade(4)),
-						Arrays.asList(new Grade(1), new Grade(2), new Grade(3), new Grade(4)),
-						Classification.First),
+						Arrays.asList(new Grade(1), new Grade(2), new Grade(3), new Grade(4)), Classification.First),
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(6), new Grade(7), new Grade(8)),
 						Arrays.asList(new Grade(5), new Grade(6), new Grade(6), new Grade(8)),
 						Classification.UpperSecond),
@@ -77,5 +76,28 @@ class DegreeTest {
 				Arguments.of(Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
 						Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
 						Classification.Fail));
+	}
+
+	@Test
+	void testClassAbove() {
+		List<Grade> higherGrades = Arrays.asList(new Grade(1), new Grade(1), new Grade(1), new Grade(1)); // First, clear
+																												
+		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper Second, clear
+																													 
+		Degree degree = new Degree(higherGrades, lowerGrades);
+
+		assertEquals(Classification.First, degree.classify(), "The classificaiton prioritized the higher profile when is clear and above the lower");
+	}
+	
+	@Test
+	void TestDegreeClassificationDiscretion() {
+		List<Grade>  nearlyEQGrades1= Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); // Upper Second, clear
+		
+		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9)); // Lower Second, clear
+																												
+																													 
+		Degree degree = new Degree(nearlyEQGrades1, nearlyEQGrades2);
+
+		assertEquals(Classification.Discretion, degree.classify(), "Discretion is applied when profiles are closely matched");
 	}
 }
