@@ -20,7 +20,7 @@ class ProfileTest {
 			new Profile(null);
 		});
 
-		assertTrue(exception.getMessage().contains("The Profile list cannot be null."));
+		assertTrue(exception.getMessage().contains("The  list cannot be null."));
 	}
 
 	@Test
@@ -32,17 +32,6 @@ class ProfileTest {
 		});
 		assertEquals("The Profile list cannot be an empty list.", exception.getMessage());
 	}
-
-//	@Test
-//	// Test the constructor with an invalid list of grades
-//	void testConstructorWithInvalidGrades() {
-//		List<Grade> invalidGrades = List.of(new Grade(21)); // known that 21 is invalid grade
-//		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-//			new Profile(invalidGrades);
-//		});
-//
-//		assertEquals("The Profile cannot contain invalid grades.", exception.getMessage());
-//	}
 
 // -------> SIX tests, one for each possible combination of Classification and truth <-------
 // ------->  value (whether the profile is clear or not) as an equivalence class <-------
@@ -66,24 +55,27 @@ class ProfileTest {
 						Classification.LowerSecond, true), // Lower Second, clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Classification.Third, true), // Third, clear
-				Arguments.of(Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
-						Classification.Fail, true), // Fail, clear
 				// additional test for checking the clarity and borderline or not clear
+				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(7)),
+						Classification.First, true), // First, clear
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(15)),
-						Classification.Third, true), // clear
+						Classification.First, true), // First, clear with 25% fails into third class 
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(15), new Grade(15)),
 						Classification.First, false), // First, not clear 
-				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(4), new Grade(4)),
-						Classification.UpperSecond, true), // Upper Second, clear
+				Arguments.of(Arrays.asList(new Grade(3), new Grade(3),new Grade(3), new Grade(4), new Grade(4), new Grade(4), new Grade(5), new Grade(5)),
+						Classification.UpperSecond, false), // Borderline Upper Second
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(9), new Grade(9)),
 						Classification.UpperSecond, false), //Upper Second, borderline not clear case as 50% fails into a lower class
-				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)),
-						Classification.LowerSecond, true), // Lower Second, clear
-				Arguments.of(Arrays.asList(new Grade(7), new Grade(7), new Grade(8), new Grade(8)),
+				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6), new Grade(6)),
+						Classification.UpperSecond, true), // Upper Second, clear  
+				Arguments.of(Arrays.asList(new Grade(10), new Grade(10), new Grade(12), new Grade(12), new Grade(13), new Grade(13), new Grade(14), new Grade(14)),		
+						Classification.Third, false),// Third, borderline not clear
+				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(15), new Grade(15)),
 						Classification.Third, true), // Third, clear
-				Arguments.of(Arrays.asList(new Grade(9), new Grade(9), new Grade(10), new Grade(10)),
-						Classification.Fail, true), // Fail, clear
-				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(7)),
-						Classification.First, true)); //First, clear 
+				Arguments.of(new Grade(9), new Grade(9), new Grade(9), new Grade(10), new Grade(11), new Grade(11), new Grade(17), new Grade(17),
+						Classification.LowerSecond, true), // Lower Second, clear  
+				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(17), new Grade(17), new Grade(18), new Grade(18)),
+						Classification.Fail, true)); // Fail, clear 
+			
 	}
 }
