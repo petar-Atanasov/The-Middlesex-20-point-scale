@@ -20,7 +20,7 @@ class GradeTest {
 	@ValueSource(ints = { 0, 21 }) // testing invalid grades
 	void testGradeConstructorInvalid(int grade) {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> new Grade(grade),
-				"Expected from the constructor to throw, but it did not.");
+				"Expected from the constructor to throw, outside of 1-20.");
 		assertTrue(exception.getMessage().contains("The grades must be between 1 and 20."));
 	}
 	
@@ -28,15 +28,22 @@ class GradeTest {
 	@ParameterizedTest
 	@ValueSource(ints = { -1, 0, 100 }) // valid percentage
 	void testFromPercentageValid(int percentage) {
-		assertDoesNotThrow(() -> Grade.fromPercentage(percentage));
+		assertDoesNotThrow(() -> Grade.fromPercentage(percentage),
+				"Should not thrown out of boundary -1,0,100");
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = { -2, 101 }) // testing invalid values for fromPercentage
 	void testFromPercentageInvalid(int percentage) {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> Grade.fromPercentage(percentage),
-				"Expected from fromPercentage() to throw, but it did not.");
+				"Expected from fromPercentage() to throw, outside of -1, 0, 100.");
 		assertTrue(exception.getMessage().contains("The percentage must be between 0, 100 or excatly -1."));
+	}
+	
+	@ParameterizedTest
+	@ValueSource(ints = {99, 100}) // testing close to the boundaries 
+	void testPrecentageConstructorBoundaries(int percentage) {
+		assertDoesNotThrow(() -> Grade.fromPercentage(percentage), "Value close to the Bounderies");
 	}
 
 // ------->ONE test for a valid input, checking that getPoints returns the right value.	<-------
