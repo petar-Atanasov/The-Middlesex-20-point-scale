@@ -14,13 +14,13 @@ public class Grade {
 	// Your additions/changes below this line
 
 	public Classification classify() {
-		if ( points <= 4 ) {
+		if (points <= 4) {
 			return Classification.First;
 		} else if (points <= 8) {
 			return Classification.UpperSecond;
-		} else if( points <= 12) {
+		} else if (points <= 12) {
 			return Classification.LowerSecond;
-		} else if( points <= 16) {
+		} else if (points <= 16) {
 			return Classification.Third;
 		}
 		return Classification.Fail;

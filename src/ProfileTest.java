@@ -48,9 +48,9 @@ class ProfileTest {
 		// the arguments are: grades, classification and the expected value form isClear
 		return Stream.of(
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(2), new Grade(3), new Grade(4)),
-						Classification.First, true), //First, clear
+						Classification.First, true), // First, clear
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(6), new Grade(7), new Grade(8)),
-						Classification.UpperSecond, true), //Upper Second, clear
+						Classification.UpperSecond, true), // Upper Second, clear
 				Arguments.of(Arrays.asList(new Grade(9), new Grade(10), new Grade(11), new Grade(12)),
 						Classification.LowerSecond, true), // Lower Second, clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
@@ -59,23 +59,26 @@ class ProfileTest {
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(7)),
 						Classification.First, true), // First, clear
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(15)),
-						Classification.First, true), // First, clear with 25% fails into third class 
+						Classification.First, true), // First, clear with 25% fails into third class
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(15), new Grade(15)),
-						Classification.First, false), // First, not clear 
-				Arguments.of(Arrays.asList(new Grade(3), new Grade(3),new Grade(3), new Grade(4), new Grade(4), new Grade(4), new Grade(5), new Grade(5)),
-						Classification.UpperSecond, false), // Borderline Upper Second
+						Classification.First, false), // First, not clear
+				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(3), new Grade(4), new Grade(4),
+						new Grade(4), new Grade(5), new Grade(5)), Classification.UpperSecond, false), // Borderline
+																										// Upper Second
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(9), new Grade(9)),
-						Classification.UpperSecond, false), //Upper Second, borderline not clear case as 50% fails into a lower class
+						Classification.UpperSecond, false), // Upper Second, borderline not clear case as 50% fails into
+															// a lower class
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6), new Grade(6)),
-						Classification.UpperSecond, true), // Upper Second, clear  
-				Arguments.of(Arrays.asList(new Grade(10), new Grade(10), new Grade(12), new Grade(12), new Grade(13), new Grade(13), new Grade(14), new Grade(14)),		
-						Classification.Third, false),// Third, borderline not clear
+						Classification.UpperSecond, true), // Upper Second, clear
+				Arguments.of(Arrays.asList(new Grade(10), new Grade(10), new Grade(12), new Grade(12), new Grade(13),
+						new Grade(13), new Grade(14), new Grade(14)), Classification.Third, false), // Third, borderline
+																									// not clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(15), new Grade(15)),
 						Classification.Third, true), // Third, clear
-				Arguments.of(new Grade(9), new Grade(9), new Grade(9), new Grade(10), new Grade(11), new Grade(11), new Grade(17), new Grade(17),
-						Classification.LowerSecond, true), // Lower Second, clear  
-				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(17), new Grade(17), new Grade(18), new Grade(18)),
-						Classification.Fail, true)); // Fail, clear 
-			
+				Arguments.of(new Grade(9), new Grade(9), new Grade(9), new Grade(10), new Grade(11), new Grade(11),
+						new Grade(17), new Grade(17), Classification.LowerSecond, true), // Lower Second, clear
+				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(17), new Grade(17), new Grade(18),
+						new Grade(18)), Classification.Fail, true)); // Fail, clear
+
 	}
 }

@@ -52,14 +52,14 @@ public class Profile {
 		} else if (countThird >= total) {
 			return Classification.Third;
 		}
-		return Classification.Fail; // if no criteria is met return the Fail class 
+		return Classification.Fail; // if no criteria is met return the Fail class
 	}
 
 	public boolean isClear() {
 		int total = grades.size();
 		int countThirdClass = 0;
-		
-		for(Grade grade: grades) {
+
+		for (Grade grade : grades) {
 			if (grade.getPoints() >= 12) {
 				countThirdClass++;
 			}
@@ -67,11 +67,11 @@ public class Profile {
 //		 now checks if more then 25% of the grades fall into third class profiles classified as first or upper
 		double thirdClassPercentage = (double) countThirdClass / total;
 		Classification cls = classify();
-		
-		if ( cls == Classification.First || cls == Classification.UpperSecond) {
+
+		if (cls == Classification.First || cls == Classification.UpperSecond) {
 			return thirdClassPercentage <= 0.25;
 		}
-		
-		return true; // Profiles classified as Lower Second or Third are clear 
+
+		return true; // Profiles classified as Lower Second or Third are clear
 	}
 }
