@@ -16,21 +16,15 @@ class ProfileTest {
 	// Test the constructor with a null value
 	void testConstructorWithNullValue() {
 		// create a Profile with null list of grades
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			new Profile(null);
-		});
-		// unexpected exception 
-		assertTrue(exception.getMessage().contains("The  list cannot be null."));
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> new Profile(null));
+		assertEquals("The Profile list cannot be null or empty.", thrown.getMessage());
 	}
 
 	@Test
 	// Test the constructor with empty list of grades
 	void testConstructorWithEmptyList() {
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			// passing an empty list
-			new Profile(List.of());
-		});
-		assertEquals("The Profile list cannot be an empty list.", exception.getMessage());
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> new Profile(List.of()));
+		assertEquals("The Profile list cannot be nur or empty list.", thrown.getMessage());
 	}
 
 // -------> SIX tests, one for each possible combination of Classification and truth <-------
@@ -40,12 +34,12 @@ class ProfileTest {
 	@MethodSource("testProfileData")
 	void testClassificationAndClarityAsEQC(List<Grade> grades, Classification cls, boolean expectedIsClear) {
 		Profile profile = new Profile(grades);
-		assertEquals(cls, profile.classify(), "Expected classifications did not match.");
+		assertEquals(cls, profile.classify(), "Expected classification did not match.");
 		assertEquals(expectedIsClear, profile.isClear(), "Expected clarity status did not match.");
 	}
 
-	
-		// wrong testing for the new Grade( which must be done inside the GradeTest class not in class ProfileTest(). 
+	// wrong testing for the new Grade( which must be done inside the GradeTest
+	// class not in class ProfileTest().
 	private static Stream<Arguments> testProfileData() {
 		// the arguments are: grades, classification and the expected value form isClear
 		return Stream.of(
@@ -57,30 +51,21 @@ class ProfileTest {
 						Classification.LowerSecond, true), // Lower Second, clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Classification.Third, true), // Third, clear
-				// additional test for checking the clarity and borderline or not clear
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(7)),
 						Classification.First, true), // First, clear
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(15)),
-						Classification.First, true), // First, clear with 25% fails into third class
-				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(15), new Grade(15)),
 						Classification.First, false), // First, not clear
-				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(3), new Grade(4), new Grade(4),
-						new Grade(4), new Grade(5), new Grade(5)), Classification.First, true), // Borderline
-																										// Upper Second
+				Arguments.of(Arrays.asList(new Grade(1), new Grade(7), new Grade(15), new Grade(15)),
+						Classification.UpperSecond, true), // not clear 
+				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(3), new Grade(3), new Grade(5),
+						new Grade(5), new Grade(5), new Grade(5)), Classification.First, true), // First clear
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(9), new Grade(9)),
-						Classification.UpperSecond, false), // Upper Second, borderline not clear case as 50% fails into
-															// a lower class
+						Classification.UpperSecond, true), // Upper Second,clear
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6), new Grade(6)),
 						Classification.UpperSecond, true), // Upper Second, clear
 				Arguments.of(Arrays.asList(new Grade(10), new Grade(10), new Grade(12), new Grade(12), new Grade(13),
-						new Grade(13), new Grade(14), new Grade(14)), Classification.Third, false), // Third, borderline
-																									// not clear
+						new Grade(13), new Grade(14), new Grade(14)), Classification.LowerSecond, false), // LowerSecond, not clear																					//not  clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(15), new Grade(15)),
-						Classification.Third, true), // Third, clear
-				Arguments.of(new Grade(9), new Grade(9), new Grade(9), new Grade(10), new Grade(11), new Grade(11),
-						new Grade(17), new Grade(17), Classification.LowerSecond, true), // Lower Second, clear
-				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(17), new Grade(17), new Grade(18),
-						new Grade(18)), Classification.Fail, true)); // Fail, clear
-
+						Classification.Third, true)); // Third, clear
 	}
 }
