@@ -16,9 +16,8 @@ class ProfileTest {
 	// Test the constructor with a null value
 	void testConstructorWithNullValue() {
 		// create a Profile with null list of grades
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			new Profile(null);
-		});
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> 
+			new Profile(null));
 
 		assertTrue(exception.getMessage().contains("The  list cannot be null."));
 	}
