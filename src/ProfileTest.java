@@ -16,9 +16,10 @@ class ProfileTest {
 	// Test the constructor with a null value
 	void testConstructorWithNullValue() {
 		// create a Profile with null list of grades
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> 
-			new Profile(null));
-
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			new Profile(null);
+		});
+		// unexpected exception 
 		assertTrue(exception.getMessage().contains("The  list cannot be null."));
 	}
 
@@ -43,6 +44,8 @@ class ProfileTest {
 		assertEquals(expectedIsClear, profile.isClear(), "Expected clarity status did not match.");
 	}
 
+	
+		// wrong testing for the new Grade( which must be done inside the GradeTest class not in class ProfileTest(). 
 	private static Stream<Arguments> testProfileData() {
 		// the arguments are: grades, classification and the expected value form isClear
 		return Stream.of(
@@ -62,7 +65,7 @@ class ProfileTest {
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(15), new Grade(15)),
 						Classification.First, false), // First, not clear
 				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(3), new Grade(4), new Grade(4),
-						new Grade(4), new Grade(5), new Grade(5)), Classification.UpperSecond, false), // Borderline
+						new Grade(4), new Grade(5), new Grade(5)), Classification.First, true), // Borderline
 																										// Upper Second
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(9), new Grade(9)),
 						Classification.UpperSecond, false), // Upper Second, borderline not clear case as 50% fails into

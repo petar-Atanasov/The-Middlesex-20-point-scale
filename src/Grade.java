@@ -33,7 +33,7 @@ public class Grade {
 		} else if (g < 0 || g > 100) {
 			throw new IllegalArgumentException("The percentage must be between 0, 100 or excatly -1.");
 		}
-
+// else if (g => 70) then the same functionality 
 		if (g >= 70) {
 			return new Grade(1); // return First class
 		} else if (g >= 60) {
@@ -47,4 +47,10 @@ public class Grade {
 		}
 
 	}
+
+	@Override
+	public String toString() {
+		return "Grade [points=" + points + "]";
+	}
+	
 }

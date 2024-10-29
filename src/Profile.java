@@ -31,16 +31,21 @@ public class Profile {
 		for (Grade grade : grades) {
 			if (grade.getPoints() <= 4) { // first class
 				countFirst++;
+				System.out.println(countFirst);
 			}
 			if (grade.getPoints() <= 8) { // upper second class
 				countUpperSecond++;
+				System.out.println(countUpperSecond);
 			}
 			if (grade.getPoints() <= 12) { // lower second class
 				countLowerSecond++;
+				System.out.println(countLowerSecond);
 			}
 			if (grade.getPoints() <= 16) { // third class
 				countThird++;
+				System.out.println(countThird);
 			}
+			
 		}
 //		then determines the classification based on the percentage
 		if (countFirst >= total) {
