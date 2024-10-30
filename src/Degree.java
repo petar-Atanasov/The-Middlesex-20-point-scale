@@ -27,7 +27,7 @@ public class Degree {
 		boolean isClearYear3 = year3Profile.isClear();
 // If both profiles have the same classification then that classification is awarded.
 		if (clsYear2 == clsYear3) {
-			return clsYear2; // returns Level 5 only
+			return clsYear3; 
 		}
 
 		// level 6 profile is better and that profile is clear, and no more than
@@ -50,13 +50,12 @@ public class Degree {
 	// value
 	private boolean classAbove(Classification lowerClass, Classification higherClass) {
 		// this function checks if the the classification is ordinal by comparing
-		return lowerClass.ordinal() > higherClass.ordinal();
+		return higherClass.ordinal() <= lowerClass.ordinal();
 	}
 
 	@Override
 	public String toString() {
 		return "Degree [year2Profile=" + year2Profile + ", year3Profile=" + year3Profile + "]";
 	}
-	
 	
 }
