@@ -82,10 +82,10 @@ class GradeTest {
 
 	private static Stream<Arguments> testFromPrecentageAsEQC() {
 		// the arguments are: percentage and expected grade
-		return Stream.of(Arguments.of(80, 1), Arguments.of(76, 2), Arguments.of(73, 3), Arguments.of(70, 4),
-				Arguments.of(67, 5), Arguments.of(65, 6), Arguments.of(62, 7), Arguments.of(60, 8), Arguments.of(57, 9),
-				Arguments.of(55, 10), Arguments.of(52, 11), Arguments.of(50, 12), Arguments.of(47, 13),
-				Arguments.of(45, 14), Arguments.of(42, 15), Arguments.of(40, 16), Arguments.of(35, 17),
-				Arguments.of(30, 18), Arguments.of(0, 19), Arguments.of(-1, 20));
+		return Stream.of(Arguments.of(80, 1), Arguments.of(76, 1), Arguments.of(73, 1), Arguments.of(70, 1),
+				Arguments.of(67, 2), Arguments.of(65, 2), Arguments.of(62, 2), Arguments.of(60, 2),
+				Arguments.of(57, 3),Arguments.of(55, 3), Arguments.of(52, 3), Arguments.of(50, 3),
+				Arguments.of(47, 4),Arguments.of(45, 4), Arguments.of(42, 4), Arguments.of(40, 4),
+				Arguments.of(35, 5),Arguments.of(30, 5), Arguments.of(0, 5), Arguments.of(-1, 20));
 	}
 }

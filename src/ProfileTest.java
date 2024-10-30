@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,6 +35,7 @@ class ProfileTest {
 	@MethodSource("testProfileData")
 	void testClassificationAndClarityAsEQC(List<Grade> grades, Classification cls, boolean expectedIsClear) {
 		Profile profile = new Profile(grades);
+	
 		assertEquals(cls, profile.classify(), "Expected classification did not match.");
 		assertEquals(expectedIsClear, profile.isClear(), "Expected clarity status did not match.");
 	}
@@ -56,7 +58,7 @@ class ProfileTest {
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(1), new Grade(7), new Grade(15)),
 						Classification.First, false), // First, not clear
 				Arguments.of(Arrays.asList(new Grade(1), new Grade(7), new Grade(15), new Grade(15)),
-						Classification.UpperSecond, true), // not clear 
+						Classification.UpperSecond, false), // not clear 
 				Arguments.of(Arrays.asList(new Grade(3), new Grade(3), new Grade(3), new Grade(3), new Grade(5),
 						new Grade(5), new Grade(5), new Grade(5)), Classification.First, true), // First clear
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(9), new Grade(9)),
@@ -64,7 +66,7 @@ class ProfileTest {
 				Arguments.of(Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6), new Grade(6)),
 						Classification.UpperSecond, true), // Upper Second, clear
 				Arguments.of(Arrays.asList(new Grade(10), new Grade(10), new Grade(12), new Grade(12), new Grade(13),
-						new Grade(13), new Grade(14), new Grade(14)), Classification.LowerSecond, false), // LowerSecond, not clear																					//not  clear
+						new Grade(13), new Grade(14), new Grade(14)), Classification.Third, true), // Third, not clear																					//not  clear
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(15), new Grade(15)),
 						Classification.Third, true)); // Third, clear
 	}

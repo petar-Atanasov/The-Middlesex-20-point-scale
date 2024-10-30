@@ -19,7 +19,7 @@ public class Profile {
 		grades = new ArrayList<>(g);
 		for (Grade grade : grades) {
 			if (grade.getPoints() >= 17) { // know that 20 is Failed grade
-				throw new IllegalArgumentException("The Profile cannot contain fail grades.");
+				throw new IllegalArgumentException("Please try again! The provided list of grades is incorrect.");
 			}
 		}
 		
