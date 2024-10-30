@@ -15,9 +15,9 @@ class DegreeTest {
 	@ParameterizedTest
 	@MethodSource("testNullGrades")
 	void testConstructorWithNullGrades(List<Grade> gradesForYearTwo, List<Grade> gradesForYearThree) {
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Degree(gradesForYearTwo, gradesForYearThree);
-		}, "The Constructor should throw an IllegalArgumentException if the grades are null.");
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+				() -> new Degree(gradesForYearTwo, gradesForYearThree));
+		assertEquals("Please try again! The provided list of grades is incorrect.", thrown.getMessage());
 
 	}
 
@@ -33,30 +33,29 @@ class DegreeTest {
 	void testConstructorWithInvalidNumberOfGrades() {
 		// creates a list with less number of four grades
 		List<Grade> grades = Arrays.asList(new Grade(3), new Grade(4));
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			// this applies for both years - two and three
-			new Degree(grades, grades);
-		}, "The Constructor should thrown an IllegalArgumentException if the number of grades is less than four.");
-
-		assertEquals("The Constructor must have at least four grades.", exception.getMessage());
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+		// this applies for both years - two and three
+		new Degree(grades, grades));
+		assertEquals("Please try again! The provided list of grades is incorrect.", exception.getMessage());
 	}
 
 	@Test
 	void testConstructorWithFailedGrades() {
 		// creates a grades with a failed values
 		List<Grade> failedGrades = Arrays.asList(new Grade(1), new Grade(17), new Grade(3), new Grade(20));
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			new Degree(failedGrades, failedGrades);
-		}, "The Constructor should throw an IllegalArgumentException if any grades are failed.");
-		assertEquals("The Constructor must have grades, which are not in the FAIL section.", exception.getMessage());
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+				() -> new Degree(failedGrades, failedGrades));
+		assertEquals("Please try again! The provided list of grades is incorrect.", exception.getMessage());
 	}
 
 // -------> FIVE tests, using Classifications as equivalence classes. <-------	
 	@ParameterizedTest
 	@MethodSource("testClassificationEQC")
 	void testClassificationAsEQC(List<Grade> gradesForYearTwo, List<Grade> gradesForYearThree, Classification cls) {
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+				() -> new Degree(gradesForYearTwo, gradesForYearThree));
 		Degree degree = new Degree(gradesForYearTwo, gradesForYearThree);
-		assertEquals(cls, degree.classify(), "The Degree should classify correctly as based on the profiles provided.");
+		assertEquals(cls, degree.classify(), thrown.getMessage());
 	}
 
 	private static Stream<Arguments> testClassificationEQC() {
@@ -73,31 +72,38 @@ class DegreeTest {
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Classification.Third),
-				Arguments.of(Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
+				Arguments.of(Arrays.asList(new Grade(15), new Grade(15), new Grade(16), new Grade(16)),
 						Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
 						Classification.Fail));
 	}
 
 	@Test
 	void testClassAbove() {
-		List<Grade> higherGrades = Arrays.asList(new Grade(1), new Grade(1), new Grade(1), new Grade(1)); // First, clear
-																												
-		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper Second, clear
-																													 
+		List<Grade> higherGrades = Arrays.asList(new Grade(1), new Grade(1), new Grade(1), new Grade(1)); // First,
+																											// clear
+
+		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper
+																											// Second,
+																											// clear
+
 		Degree degree = new Degree(higherGrades, lowerGrades);
 
-		assertEquals(Classification.First, degree.classify(), "The classificaiton prioritized the higher profile when is clear and above the lower");
+		assertEquals(Classification.First, degree.classify(), degree.toString());
 	}
-	
+
 	@Test
 	void TestDegreeClassificationDiscretion() {
-		List<Grade>  nearlyEQGrades1= Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); // Upper Second, clear
-		
-		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9)); // Lower Second, clear
-																												
-																													 
+		List<Grade> nearlyEQGrades1 = Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); // Upper
+																												// Second,
+																												// clear
+
+		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9)); // Lower
+																												// Second,
+																												// clear
+
 		Degree degree = new Degree(nearlyEQGrades1, nearlyEQGrades2);
 
-		assertEquals(Classification.Discretion, degree.classify(), "Discretion is applied when profiles are closely matched");
+		assertEquals(Classification.Discretion, degree.classify(),
+				"Discretion is applied when profiles are closely matched");
 	}
 }

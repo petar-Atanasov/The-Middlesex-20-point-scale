@@ -43,13 +43,20 @@ public class Degree {
 		}
 
 		// Otherwise, a procedure called discretion is applied
-		return Classification.Discretion;
+		return Classification.Third;
 	}
 
 	// helper function which determines if a class is above another based on ordinal
 	// value
 	private boolean classAbove(Classification lowerClass, Classification higherClass) {
 		// this function checks if the the classification is ordinal by comparing
-		return higherClass.ordinal() < lowerClass.ordinal();
+		return lowerClass.ordinal() > higherClass.ordinal();
 	}
+
+	@Override
+	public String toString() {
+		return "Degree [year2Profile=" + year2Profile + ", year3Profile=" + year3Profile + "]";
+	}
+	
+	
 }
