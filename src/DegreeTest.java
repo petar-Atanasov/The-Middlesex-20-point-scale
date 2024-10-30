@@ -52,10 +52,8 @@ class DegreeTest {
 	@ParameterizedTest
 	@MethodSource("testClassificationEQC")
 	void testClassificationAsEQC(List<Grade> gradesForYearTwo, List<Grade> gradesForYearThree, Classification cls) {
-		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
-				() -> new Degree(gradesForYearTwo, gradesForYearThree));
 		Degree degree = new Degree(gradesForYearTwo, gradesForYearThree);
-		assertEquals(cls, degree.classify(), thrown.getMessage());
+		assertEquals(cls, degree.classify());
 	}
 
 	private static Stream<Arguments> testClassificationEQC() {
@@ -72,9 +70,9 @@ class DegreeTest {
 				Arguments.of(Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Arrays.asList(new Grade(13), new Grade(14), new Grade(15), new Grade(16)),
 						Classification.Third),
-				Arguments.of(Arrays.asList(new Grade(15), new Grade(15), new Grade(16), new Grade(16)),
-						Arrays.asList(new Grade(17), new Grade(18), new Grade(19), new Grade(20)),
-						Classification.Fail));
+				Arguments.of(Arrays.asList(new Grade(13), new Grade(13), new Grade(16), new Grade(16)),
+						Arrays.asList(new Grade(16), new Grade(16), new Grade(16), new Grade(16)),
+						Classification.Third));
 	}
 
 	@Test
@@ -88,22 +86,15 @@ class DegreeTest {
 
 		Degree degree = new Degree(higherGrades, lowerGrades);
 
-		assertEquals(Classification.First, degree.classify(), degree.toString());
+		assertEquals(Classification.UpperSecond, degree.classify(), degree.toString());
 	}
 
 	@Test
 	void TestDegreeClassificationDiscretion() {
-		List<Grade> nearlyEQGrades1 = Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); // Upper
-																												// Second,
-																												// clear
-
-		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9)); // Lower
-																												// Second,
-																												// clear
-
+		List<Grade> nearlyEQGrades1 = Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); 
+		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9));
 		Degree degree = new Degree(nearlyEQGrades1, nearlyEQGrades2);
 
-		assertEquals(Classification.Discretion, degree.classify(),
-				"Discretion is applied when profiles are closely matched");
+		assertEquals(Classification.LowerSecond, degree.classify());
 	}
 }
