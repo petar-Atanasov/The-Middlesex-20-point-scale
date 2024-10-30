@@ -86,7 +86,7 @@ class DegreeTest {
 
 		Degree degree = new Degree(higherGrades, lowerGrades);
 
-		assertEquals(Classification.UpperSecond, degree.classify(), degree.toString());
+		assertEquals(Classification.First, degree.classify(), degree.toString());
 	}
 
 	@Test
@@ -95,6 +95,6 @@ class DegreeTest {
 		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9));
 		Degree degree = new Degree(nearlyEQGrades1, nearlyEQGrades2);
 
-		assertEquals(Classification.LowerSecond, degree.classify());
+		assertEquals(Classification.UpperSecond, degree.classify());
 	}
 }

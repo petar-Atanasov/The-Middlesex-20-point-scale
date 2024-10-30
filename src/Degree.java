@@ -27,35 +27,35 @@ public class Degree {
 		boolean isClearYear3 = year3Profile.isClear();
 // If both profiles have the same classification then that classification is awarded.
 		if (clsYear2 == clsYear3) {
-			return clsYear3; 
-		}
-
-		// level 6 profile is better and that profile is clear, and no more than
-		// one class above the level 5 profile
-		if (isClearYear3 && classAbove(clsYear2, clsYear3)) {
 			return clsYear3;
+			
+		}// level 6 profile is better and that profile is clear, and no more than
+			// one class above the level 5 profile
+		if (isClearYear3 && classAbove(clsYear3, clsYear2)) {
+			return clsYear3;
+			// level 5 profile is better and that profile is clear, and no more than
+			// one class above the level 6 profile
 		}
-
-		// level 5 profile is better and that profile is clear, and no more than
-		// one class above the level 6 profile
 		if (isClearYear2 && classAbove(clsYear2, clsYear3)) {
 			return clsYear2;
 		}
-
 		// Otherwise, a procedure called discretion is applied
-		return Classification.Third;
+		return Classification.Discretion;
+
 	}
 
-	// helper function which determines if a class is above another based on ordinal
-	// value
-	private boolean classAbove(Classification lowerClass, Classification higherClass) {
-		// this function checks if the the classification is ordinal by comparing
-		return higherClass.ordinal() <= lowerClass.ordinal();
+	private boolean classAbove(Classification higher, Classification lower) {
+		if(higher == Classification.First && lower == Classification.UpperSecond ||
+				higher == Classification.UpperSecond && lower == Classification.LowerSecond ||
+				higher == Classification.LowerSecond && lower == Classification.Third) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public String toString() {
 		return "Degree [year2Profile=" + year2Profile + ", year3Profile=" + year3Profile + "]";
 	}
-	
+
 }
