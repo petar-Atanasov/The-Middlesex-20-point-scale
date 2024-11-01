@@ -82,16 +82,17 @@ class DegreeTest {
 		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper Second,clear
 
 		Degree degree = new Degree(higherGrades, lowerGrades);
-
+		Degree degree2 = new Degree(lowerGrades, higherGrades);
 		assertEquals(Classification.First, degree.classify(), degree.toString());
+		assertEquals(Classification.First, degree2.classify(), degree2.toString());
 	}
 
 	@Test
 	void TestDegreeClassificationDiscretion() {
-		List<Grade> nearlyEQGrades1 = Arrays.asList(new Grade(5), new Grade(5), new Grade(7), new Grade(7)); 
+		List<Grade> nearlyEQGrades1 = Arrays.asList(new Grade(1), new Grade(1), new Grade(3), new Grade(10)); 
 		List<Grade> nearlyEQGrades2 = Arrays.asList(new Grade(9), new Grade(9), new Grade(9), new Grade(9));
 		Degree degree = new Degree(nearlyEQGrades1, nearlyEQGrades2);
 
-		assertEquals(Classification.UpperSecond, degree.classify());
+		assertEquals(Classification.Discretion, degree.classify());
 	}
 }
