@@ -25,17 +25,17 @@ public class Degree {
 
 		boolean isClearYear2 = year2Profile.isClear();
 		boolean isClearYear3 = year3Profile.isClear();
-// If both profiles have the same classification then that classification is awarded.
+// 		If both profiles have the same classification then that classification is awarded.
 		if (clsYear2 == clsYear3) {
 			return clsYear3;
 		}
 		// level 6 profile is better and that profile is clear, and no more than
-			// one class above the level 5 profile
+		// one class above the level 5 profile
 		if (isClearYear3 && classAbove(clsYear3, clsYear2)) {
 			return clsYear3;
 		}
 		// level 5 profile is better and that profile is clear, and no more than
-			// one class above the level 6 profile
+		// one class above the level 6 profile
 		if (isClearYear2 && classAbove(clsYear2, clsYear3)) {
 			return clsYear2;
 		}
@@ -45,9 +45,9 @@ public class Degree {
 	}
 
 	private boolean classAbove(Classification higher, Classification lower) {
-		if(higher == Classification.First && lower == Classification.UpperSecond ||
-				higher == Classification.UpperSecond && lower == Classification.LowerSecond ||
-				higher == Classification.LowerSecond && lower == Classification.Third) {
+		if (higher == Classification.First && lower == Classification.UpperSecond
+				|| higher == Classification.UpperSecond && lower == Classification.LowerSecond
+				|| higher == Classification.LowerSecond && lower == Classification.Third) {
 			return true;
 		}
 		return false;
