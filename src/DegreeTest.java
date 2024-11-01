@@ -32,10 +32,11 @@ class DegreeTest {
 	@Test
 	void testConstructorWithInvalidNumberOfGrades() {
 		// creates a list with less number of four grades
-		List<Grade> grades = Arrays.asList(new Grade(3), new Grade(4));
+		List<Grade> gradesYear2 = Arrays.asList(new Grade(3), new Grade(4));
+		List<Grade> gradesYear3 = Arrays.asList(new Grade(1), new Grade(5), new Grade(2));
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
 		// this applies for both years - two and three
-		new Degree(grades, grades));
+		new Degree(gradesYear2, gradesYear3));
 		assertEquals("Please try again! The provided list of grades is incorrect.", exception.getMessage());
 	}
 
@@ -77,12 +78,8 @@ class DegreeTest {
 
 	@Test
 	void testClassAbove() {
-		List<Grade> higherGrades = Arrays.asList(new Grade(1), new Grade(1), new Grade(1), new Grade(1)); // First,
-																											// clear
-
-		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper
-																											// Second,
-																											// clear
+		List<Grade> higherGrades = Arrays.asList(new Grade(1), new Grade(1), new Grade(1), new Grade(1)); // First,clear
+		List<Grade> lowerGrades = Arrays.asList(new Grade(5), new Grade(5), new Grade(6), new Grade(6)); // Upper Second,clear
 
 		Degree degree = new Degree(higherGrades, lowerGrades);
 

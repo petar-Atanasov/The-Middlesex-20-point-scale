@@ -28,14 +28,14 @@ public class Degree {
 // If both profiles have the same classification then that classification is awarded.
 		if (clsYear2 == clsYear3) {
 			return clsYear3;
-			
-		}// level 6 profile is better and that profile is clear, and no more than
+		}
+		// level 6 profile is better and that profile is clear, and no more than
 			// one class above the level 5 profile
 		if (isClearYear3 && classAbove(clsYear3, clsYear2)) {
 			return clsYear3;
-			// level 5 profile is better and that profile is clear, and no more than
-			// one class above the level 6 profile
 		}
+		// level 5 profile is better and that profile is clear, and no more than
+			// one class above the level 6 profile
 		if (isClearYear2 && classAbove(clsYear2, clsYear3)) {
 			return clsYear2;
 		}
