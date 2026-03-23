@@ -12,7 +12,7 @@ The goal of this project is to demonstrate:
 - how module profiles and full degree results can be classified
 - how **JUnit testing** can be used to validate both normal behaviour and edge cases
 
-### This makes the project a good example of test-driven academic software development, where correctness matters as much as implementation.
+#### This makes the project a good example of test-driven academic software development, where correctness matters as much as implementation.
 ---
 ## What the Project Does
 The system is split into a few simple Java classes:
