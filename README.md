@@ -47,10 +47,10 @@ The `Grade` constructor rejects values outside the valid 1-20 range.
 ### `Grade.fromPercentage(int)` converts a percentage into an MDX grade. In this implementation:
 - ### `70+` maps to grade  `1`
 - ### `60+` maps to  `2`
-- ### `50+ maps to  `3`
+- ### `50+` maps to  `3`
 - ### `40+` maps to  `4`
-- below ### `40` maps to  `5`
-- ###`-1` is treated as non-participation and returns  `20`
+- below `40` maps to  `5`
+- `-1` is treated as non-participation and returns  `20`
 
 ### 3. Grade classification
 A grade point is mapped to classification band:
