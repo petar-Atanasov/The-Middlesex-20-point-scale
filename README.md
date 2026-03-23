@@ -1,7 +1,7 @@
 # The Middlesex 20 Point Scale
 
 ## Project Overview
-This project implements a small Java system for working with the **Middlesex University 20-point grading scale**. It models grades, academic profiles, and degree classifications, and uses **JUnit 5 testing** to verify that each rquired task behaves correctly.
+### This project implements a small Java system for working with the **Middlesex University 20-point grading scale**. It models grades, academic profiles, and degree classifications, and uses **JUnit 5 testing** to verify that each rquired task behaves correctly.
 ---
 ## Project Purpose
 The main purpose of the project is not only to build the grading logic, but to understand the importance of **unit testing** by writting test for each required feature from the project brief. The repository shows how to test constructors, boundary conditions, ivalid inputs, equivalance classes, and classification rules in a structured way.
